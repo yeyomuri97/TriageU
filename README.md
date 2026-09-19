@@ -1,6 +1,6 @@
 # TriageU
 
-App Android para priorizar el tiempo de estudio. Ayuda al estudiante a organizar materias, ver qué hacer hoy, anticipar compromisos y seguir su progreso — sin rachas rígidas ni formularios innecesarios.
+App Android para priorizar el tiempo de estudio. Ayuda al estudiante a organizar materias, ver qué hacer hoy, anticipar compromisos y seguir su progreso.
 
 **Prioriza tu tiempo. Avanza a tu ritmo.**
 
@@ -56,8 +56,6 @@ app/src/main/java/.../composelble4/
 4. Ejecuta en emulador o dispositivo (minSdk 30)
 
 ## Sistema visual
-
-Paleta basada en el diseño del equipo:
 
 | Uso | Color | HEX |
 | --- | --- | --- |
