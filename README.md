@@ -4,6 +4,8 @@ App Android para priorizar el tiempo de estudio. Ayuda al estudiante a organizar
 
 **Prioriza tu tiempo. Avanza a tu ritmo.**
 
+![TriageU — pantallas principales](docs/screens.png)
+
 ## Características
 
 - **Configuración inicial** — Materias y disponibilidad sin registro obligatorio
@@ -16,7 +18,7 @@ App Android para priorizar el tiempo de estudio. Ayuda al estudiante a organizar
 ## Stack técnico
 
 | Tecnología | Uso |
-|---|---|
+| --- | --- |
 | Kotlin | Lenguaje |
 | Jetpack Compose | UI |
 | Material Design 3 | Tema y componentes |
@@ -58,7 +60,7 @@ app/src/main/java/.../composelble4/
 Paleta basada en el diseño del equipo:
 
 | Uso | Color | HEX |
-|---|---|---|
+| --- | --- | --- |
 | Principal | Verde salvia | `#4F7A68` |
 | Verde suave | Fondo / selección | `#EAF4EE` |
 | Fondo | Blanco verdoso | `#F8FBF9` |
