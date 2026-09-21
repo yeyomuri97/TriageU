@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "edu.unicauca.aplimovil.composelble4"
-        minSdk = 30
+        minSdk = 29
         targetSdk = 37
         versionCode = 1
         versionName = "1.0"
