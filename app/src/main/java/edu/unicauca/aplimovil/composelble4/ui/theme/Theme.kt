@@ -1,62 +1,70 @@
 package edu.unicauca.aplimovil.composelble4.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
-private val LightColorScheme = lightColorScheme(
+private val TriageUColorScheme = lightColorScheme(
+
+    // Color principal
     primary = SageGreen,
     onPrimary = OnPrimary,
+
+    // Contenedor principal
     primaryContainer = SoftGreen,
     onPrimaryContainer = SageGreenDark,
+
+    // Color secundario
     secondary = SageGreenDark,
     onSecondary = OnPrimary,
+
+    // Contenedor secundario
     secondaryContainer = SoftGreen,
     onSecondaryContainer = SageGreenDark,
-    tertiary = SageGreen,
+
+    // Fondo general
     background = BackgroundGreen,
     onBackground = TextPrimary,
+
+    // Superficies
     surface = SurfaceWhite,
     onSurface = TextPrimary,
+
+    // Variantes de superficie
     surfaceVariant = SoftGreen,
     onSurfaceVariant = TextSecondary,
+
+    // Bordes
     outline = BorderGreen,
-    outlineVariant = BorderGreen,
+
+    // Estados de error
     error = PriorityHighText,
-    onError = OnPrimary,
     errorContainer = PriorityHighBg,
+    onError = OnPrimary,
     onErrorContainer = PriorityHighText
 )
 
-private val DarkColorScheme = darkColorScheme(
-    primary = SoftGreen,
-    onPrimary = SageGreenDark,
-    primaryContainer = SageGreenDark,
-    onPrimaryContainer = SoftGreen,
-    secondary = SoftGreen,
-    onSecondary = SageGreenDark,
-    background = Color(0xFF121412),
-    onBackground = Color(0xFFE8EDE9),
-    surface = Color(0xFF1A1E1B),
-    onSurface = Color(0xFFE8EDE9),
-    surfaceVariant = Color(0xFF2A302C),
-    onSurfaceVariant = Color(0xFFA8B5AE),
-    outline = Color(0xFF4A554F)
+private val TriageUShapes = Shapes(
+
+    small = RoundedCornerShape(12.dp),
+
+    medium = RoundedCornerShape(16.dp),
+
+    large = RoundedCornerShape(20.dp)
 )
 
 @Composable
 fun Composelble4Theme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = TriageUColorScheme,
         typography = Typography,
+        shapes = TriageUShapes,
         content = content
     )
 }

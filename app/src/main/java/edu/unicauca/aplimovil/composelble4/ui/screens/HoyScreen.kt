@@ -1,5 +1,6 @@
 package edu.unicauca.aplimovil.composelble4.ui.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -13,34 +14,29 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import edu.unicauca.aplimovil.composelble4.ui.theme.BorderGreen
 import edu.unicauca.aplimovil.composelble4.ui.theme.PriorityHighBg
 import edu.unicauca.aplimovil.composelble4.ui.theme.PriorityHighText
 import edu.unicauca.aplimovil.composelble4.ui.theme.PriorityLowBg
 import edu.unicauca.aplimovil.composelble4.ui.theme.PriorityLowText
 import edu.unicauca.aplimovil.composelble4.ui.theme.PriorityMedBg
 import edu.unicauca.aplimovil.composelble4.ui.theme.PriorityMedText
-import edu.unicauca.aplimovil.composelble4.ui.theme.SageGreen
-import edu.unicauca.aplimovil.composelble4.ui.theme.SoftGreen
-import edu.unicauca.aplimovil.composelble4.ui.theme.SurfaceWhite
-import edu.unicauca.aplimovil.composelble4.ui.theme.TextPrimary
-import edu.unicauca.aplimovil.composelble4.ui.theme.TextSecondary
 import edu.unicauca.aplimovil.composelble4.viewmodel.ActivityItem
 import edu.unicauca.aplimovil.composelble4.viewmodel.AppUiState
 import edu.unicauca.aplimovil.composelble4.viewmodel.Priority
@@ -51,166 +47,406 @@ fun HoyScreen(
     onToggleComplete: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+
     Column(
         modifier = modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 20.dp, vertical = 16.dp)
-    ) {
-        Text(
-            text = "Hoy",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = TextPrimary
-        )
-        Text(
-            text = "Prioriza tu tiempo. Avanza a tu ritmo.",
-            fontSize = 14.sp,
-            color = TextSecondary
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        // Resumen rápido
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            SummaryChip(
-                label = "Recomendadas",
-                value = "${uiState.todayActivities.count { it.recommended }}",
-                modifier = Modifier.weight(1f)
+            .background(
+                MaterialTheme.colorScheme.background
             )
-            SummaryChip(
-                label = "Pendientes",
-                value = "${uiState.todayActivities.count { !it.completed }}",
-                modifier = Modifier.weight(1f)
+            .verticalScroll(
+                rememberScrollState()
+            )
+            .padding(
+                horizontal = 20.dp,
+                vertical = 24.dp
+            )
+    ) {
+
+        // ------------------------------------------------
+        // ENCABEZADO
+        // ------------------------------------------------
+
+        Text(
+            text = "Buenos días!",
+            style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+
+        Spacer(
+            modifier = Modifier.height(2.dp)
+        )
+
+        Text(
+            text = "Lunes, 31 de agosto",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
+
+
+        // ------------------------------------------------
+        // RESUMEN DEL DÍA
+        // ------------------------------------------------
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    color =
+                        MaterialTheme.colorScheme.primaryContainer,
+                    shape =
+                        RoundedCornerShape(14.dp)
+                )
+                .padding(
+                    horizontal = 14.dp,
+                    vertical = 10.dp
+                )
+        ) {
+
+            Text(
+                text = "Hoy tienes:",
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+
+            Spacer(
+                modifier = Modifier.height(2.dp)
+            )
+
+            Text(
+                text = "${uiState.availableTime} disponibles",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Text(
+                text = "${uiState.plannedTime} planificadas",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
+
+
+        // ------------------------------------------------
+        // PLAN RECOMENDADO
+        // ------------------------------------------------
 
         Text(
-            text = "Actividades de hoy",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = TextPrimary
+            text = "Tu plan recomendado",
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onBackground
         )
-        Spacer(modifier = Modifier.height(12.dp))
+
+
+        Spacer(
+            modifier = Modifier.height(10.dp)
+        )
+
 
         uiState.todayActivities.forEach { activity ->
-            ActivityCard(
+
+            RecommendedActivityCard(
                 activity = activity,
-                onToggle = { onToggleComplete(activity.id) }
+                onToggleComplete = {
+                    onToggleComplete(activity.id)
+                }
             )
-            Spacer(modifier = Modifier.height(10.dp))
+
+            Spacer(
+                modifier = Modifier.height(10.dp)
+            )
         }
-    }
-}
 
-@Composable
-private fun SummaryChip(label: String, value: String, modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .clip(RoundedCornerShape(12.dp))
-            .background(SoftGreen)
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = value,
-            fontSize = 22.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = SageGreen
-        )
-        Text(
-            text = label,
-            fontSize = 13.sp,
-            color = TextSecondary
-        )
-    }
-}
 
-@Composable
-private fun ActivityCard(
-    activity: ActivityItem,
-    onToggle: () -> Unit
-) {
-    val (bg, textColor, label) = when (activity.priority) {
-        Priority.HIGH -> Triple(PriorityHighBg, PriorityHighText, "Alta")
-        Priority.MEDIUM -> Triple(PriorityMedBg, PriorityMedText, "Media")
-        Priority.LOW -> Triple(PriorityLowBg, PriorityLowText, "Baja")
-    }
+        // ------------------------------------------------
+        // AJUSTAR PLAN
+        // ------------------------------------------------
 
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
-            .background(SurfaceWhite)
-            .border(1.dp, BorderGreen, RoundedCornerShape(16.dp))
-            .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        // Check
-        Box(
+        OutlinedButton(
+            onClick = {
+                // Acción futura para ajustar el plan.
+            },
             modifier = Modifier
-                .size(28.dp)
-                .clip(CircleShape)
-                .clickable(onClick = onToggle)
-                .then(
-                    if (activity.completed)
-                        Modifier.background(SageGreen)
-                    else
-                        Modifier.border(2.dp, BorderGreen, CircleShape)
-                ),
-            contentAlignment = Alignment.Center
+                .align(Alignment.CenterHorizontally)
+                .height(44.dp),
+            shape = RoundedCornerShape(12.dp),
+            border = BorderStroke(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.primary
+            )
         ) {
-            if (activity.completed) {
-                Icon(
-                    imageVector = Icons.Default.CheckCircle,
-                    contentDescription = "Completada",
-                    tint = SurfaceWhite,
-                    modifier = Modifier.size(20.dp)
-                )
-            }
+
+            Text(
+                text = "Ajustar mi plan",
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.primary
+            )
         }
 
-        Spacer(modifier = Modifier.width(12.dp))
 
-        Column(modifier = Modifier.weight(1f)) {
+        Spacer(
+            modifier = Modifier.height(24.dp)
+        )
+    }
+}
+
+
+@Composable
+private fun RecommendedActivityCard(
+    activity: ActivityItem,
+    onToggleComplete: () -> Unit
+) {
+
+    val chipBackground =
+        when (activity.priority) {
+
+            Priority.HIGH ->
+                PriorityHighBg
+
+            Priority.MEDIUM ->
+                PriorityMedBg
+
+            Priority.LOW ->
+                PriorityLowBg
+        }
+
+
+    val chipTextColor =
+        when (activity.priority) {
+
+            Priority.HIGH ->
+                PriorityHighText
+
+            Priority.MEDIUM ->
+                PriorityMedText
+
+            Priority.LOW ->
+                PriorityLowText
+        }
+
+
+    val priorityText =
+        when (activity.priority) {
+
+            Priority.HIGH ->
+                "↑ PRIORIDAD ALTA"
+
+            Priority.MEDIUM ->
+                "— PRIORIDAD MEDIA"
+
+            Priority.LOW ->
+                "↓ PRIORIDAD BAJA"
+        }
+
+
+    val preparationText =
+        when (activity.preparation) {
+
+            1, 2 ->
+                "baja"
+
+            3 ->
+                "media"
+
+            else ->
+                "alta"
+        }
+
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(
+            containerColor =
+                MaterialTheme.colorScheme.surface
+        ),
+        border = BorderStroke(
+            width = 1.dp,
+            color = MaterialTheme.colorScheme.outline
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 0.dp
+        )
+    ) {
+
+        Column(
+            modifier = Modifier.padding(
+                horizontal = 14.dp,
+                vertical = 12.dp
+            )
+        ) {
+
+            // --------------------------------------------
+            // PRIORIDAD + BOTÓN DE COMPLETADO
+            // --------------------------------------------
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement =
+                    Arrangement.SpaceBetween,
+                verticalAlignment =
+                    Alignment.CenterVertically
+            ) {
+
+                Box(
+                    modifier = Modifier
+                        .background(
+                            color = chipBackground,
+                            shape =
+                                RoundedCornerShape(8.dp)
+                        )
+                        .padding(
+                            horizontal = 8.dp,
+                            vertical = 4.dp
+                        )
+                ) {
+
+                    Text(
+                        text = priorityText,
+                        style =
+                            MaterialTheme.typography.labelSmall,
+                        color = chipTextColor
+                    )
+                }
+
+
+                Box(
+                    modifier = Modifier
+                        .size(22.dp)
+                        .border(
+                            width = 1.5.dp,
+                            color =
+                                if (activity.completed) {
+                                    MaterialTheme.colorScheme.primary
+                                } else {
+                                    MaterialTheme.colorScheme.onSurfaceVariant
+                                },
+                            shape = CircleShape
+                        )
+                        .background(
+                            color =
+                                if (activity.completed) {
+                                    MaterialTheme.colorScheme.primary
+                                } else {
+                                    MaterialTheme.colorScheme.surface
+                                },
+                            shape = CircleShape
+                        )
+                        .clickable {
+                            onToggleComplete()
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+
+                    if (activity.completed) {
+
+                        Icon(
+                            imageVector =
+                                Icons.Default.Check,
+                            contentDescription =
+                                "Actividad realizada",
+                            tint =
+                                MaterialTheme.colorScheme.onPrimary,
+                            modifier =
+                                Modifier.size(15.dp)
+                        )
+                    }
+                }
+            }
+
+
+            Spacer(
+                modifier = Modifier.height(8.dp)
+            )
+
+
+            // --------------------------------------------
+            // TÍTULO
+            // --------------------------------------------
+
             Text(
                 text = activity.title,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = if (activity.completed) TextSecondary else TextPrimary
+                style = MaterialTheme.typography.titleMedium,
+                color =
+                    if (activity.completed) {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    } else {
+                        MaterialTheme.colorScheme.onSurface
+                    },
+                textDecoration =
+                    if (activity.completed) {
+                        TextDecoration.LineThrough
+                    } else {
+                        TextDecoration.None
+                    }
             )
-            Text(
-                text = "${activity.subject} · ${activity.durationMin} min",
-                fontSize = 13.sp,
-                color = TextSecondary
-            )
-            if (activity.recommended) {
-                Text(
-                    text = "Recomendado",
-                    fontSize = 12.sp,
-                    color = SageGreen,
-                    fontWeight = FontWeight.Medium
-                )
-            }
-        }
 
-        // Prioridad chip
-        Box(
-            modifier = Modifier
-                .clip(RoundedCornerShape(18.dp))
-                .background(bg)
-                .padding(horizontal = 10.dp, vertical = 4.dp)
-        ) {
+
+            Spacer(
+                modifier = Modifier.height(2.dp)
+            )
+
+
+            // --------------------------------------------
+            // DURACIÓN
+            // --------------------------------------------
+
             Text(
-                text = label,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Medium,
-                color = textColor
+                text =
+                    "${activity.durationMin} min recomendados",
+                style =
+                    MaterialTheme.typography.bodySmall,
+                color =
+                    MaterialTheme.colorScheme.primary
+            )
+
+
+            Spacer(
+                modifier = Modifier.height(4.dp)
+            )
+
+
+            // --------------------------------------------
+            // FECHA + PESO
+            // --------------------------------------------
+
+            val weightText =
+                activity.weightPercent?.let {
+                    " · $it % de la nota"
+                } ?: ""
+
+
+            Text(
+                text =
+                    "${activity.dueText}$weightText",
+                style =
+                    MaterialTheme.typography.bodySmall,
+                color =
+                    MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+
+            // --------------------------------------------
+            // PREPARACIÓN
+            // --------------------------------------------
+
+            Text(
+                text =
+                    "Preparación: $preparationText",
+                style =
+                    MaterialTheme.typography.bodySmall,
+                color =
+                    MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }
