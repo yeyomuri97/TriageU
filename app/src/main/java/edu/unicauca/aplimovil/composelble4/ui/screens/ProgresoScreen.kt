@@ -72,7 +72,7 @@ fun ProgresoScreen(
         // ------------------------------------------------
 
         Text(
-            text = "Tu progreso",
+            text = "Mi progreso",
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.onBackground
         )
