@@ -89,10 +89,7 @@ fun SetupScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(48.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .border(1.dp, BorderGreen, RoundedCornerShape(12.dp))
-                    .padding(horizontal = 16.dp),
+                    .padding(vertical = 4.dp, horizontal = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -101,22 +98,17 @@ fun SetupScreen(
                     color = TextPrimary
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
         }
 
-        OutlinedButton(
+        TextButton(
             onClick = { /* Agregar materia — demo */ },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(44.dp),
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.outlinedButtonColors(contentColor = SageGreen),
-            border = androidx.compose.foundation.BorderStroke(1.dp, SageGreen)
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.textButtonColors(contentColor = SageGreen)
         ) {
             Text("+ Agregar materia", fontWeight = FontWeight.Medium)
         }
 
-        Spacer(modifier = Modifier.height(28.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         // Sección 2: Disponibilidad
         Text(
@@ -125,33 +117,25 @@ fun SetupScreen(
             fontWeight = FontWeight.SemiBold,
             color = TextPrimary
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         uiState.availability.forEach { avail ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(44.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .border(1.dp, BorderGreen, RoundedCornerShape(12.dp))
-                    .padding(horizontal = 16.dp),
+                    .padding(vertical = 6.dp, horizontal = 4.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(avail.day, fontSize = 15.sp, color = TextPrimary)
                 Text(avail.hours, fontSize = 14.sp, color = TextSecondary)
             }
-            Spacer(modifier = Modifier.height(8.dp))
         }
 
-        OutlinedButton(
+        TextButton(
             onClick = { },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(44.dp),
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.outlinedButtonColors(contentColor = SageGreen),
-            border = androidx.compose.foundation.BorderStroke(1.dp, SageGreen)
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.textButtonColors(contentColor = SageGreen)
         ) {
             Text("Editar disponibilidad", fontWeight = FontWeight.Medium)
         }
