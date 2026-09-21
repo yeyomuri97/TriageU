@@ -1,6 +1,7 @@
 package edu.unicauca.aplimovil.composelble4.ui.screens
 
-import androidx.compose.foundation.border
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,22 +15,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import edu.unicauca.aplimovil.composelble4.ui.theme.BorderGreen
-import edu.unicauca.aplimovil.composelble4.ui.theme.SageGreen
-import edu.unicauca.aplimovil.composelble4.ui.theme.SurfaceWhite
-import edu.unicauca.aplimovil.composelble4.ui.theme.TextPrimary
-import edu.unicauca.aplimovil.composelble4.ui.theme.TextSecondary
 import edu.unicauca.aplimovil.composelble4.viewmodel.AppUiState
 
 @Composable
@@ -39,138 +34,332 @@ fun SetupScreen(
     onSkip: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+
     Column(
         modifier = modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 20.dp, vertical = 24.dp)
+            .background(
+                MaterialTheme.colorScheme.background
+            )
+            .verticalScroll(
+                rememberScrollState()
+            )
+            .padding(
+                horizontal = 20.dp,
+                vertical = 24.dp
+            )
     ) {
-        // Marca
+
+        // ------------------------------------------------
+        // MARCA
+        // ------------------------------------------------
+
         Text(
             text = "TriageU",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = SageGreen
-        )
-        Text(
-            text = "Prioriza tu tiempo. Avanza a tu ritmo.",
-            fontSize = 13.sp,
-            color = TextSecondary
+            modifier = Modifier.fillMaxWidth(),
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.primary,
+            textAlign = TextAlign.Center
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
+
+        Spacer(
+            modifier = Modifier.height(4.dp)
+        )
+
+
+        Text(
+            text = "Prioriza tu tiempo.\nAvanza a tu ritmo.",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
+
+
+        // ------------------------------------------------
+        // TÍTULO
+        // ------------------------------------------------
 
         Text(
             text = "Prepara tu semestre",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = TextPrimary
+            style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.colorScheme.onBackground
         )
-        Spacer(modifier = Modifier.height(8.dp))
+
+
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
+
+
         Text(
-            text = "Cuéntanos qué estás cursando y cuándo sueles tener tiempo para estudiar.",
-            fontSize = 14.sp,
-            color = TextSecondary,
-            lineHeight = 20.sp
+            text =
+                "Cuéntanos qué estás cursando y cuándo sueles tener tiempo para estudiar.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
 
-        // Sección 1: Materias
+        Spacer(
+            modifier = Modifier.height(24.dp)
+        )
+
+
+        // ------------------------------------------------
+        // MATERIAS
+        // ------------------------------------------------
+
         Text(
-            text = "Mis materias",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = TextPrimary
+            text = "MIS MATERIAS",
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onBackground
         )
-        Spacer(modifier = Modifier.height(12.dp))
 
-        uiState.subjects.forEach { subject ->
+
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+
+
+        // En el prototipo mostramos las dos materias
+        // que aparecen en el diseño de Figma.
+        uiState.subjects
+            .take(2)
+            .forEach { subject ->
+
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp),
+
+                    shape =
+                        RoundedCornerShape(12.dp),
+
+                    colors =
+                        CardDefaults.cardColors(
+                            containerColor =
+                                MaterialTheme.colorScheme.surface
+                        ),
+
+                    border =
+                        BorderStroke(
+                            width = 1.dp,
+                            color =
+                                MaterialTheme.colorScheme.outline
+                        ),
+
+                    elevation =
+                        CardDefaults.cardElevation(
+                            defaultElevation = 0.dp
+                        )
+                ) {
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(
+                                horizontal = 16.dp
+                            ),
+
+                        verticalAlignment =
+                            Alignment.CenterVertically
+                    ) {
+
+                        Text(
+                            text = subject.name,
+                            style =
+                                MaterialTheme.typography.bodyMedium,
+                            color =
+                                MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+
+
+                Spacer(
+                    modifier =
+                        Modifier.height(8.dp)
+                )
+            }
+
+
+        TextButton(
+            onClick = {
+                // Funcionalidad futura:
+                // agregar una nueva materia.
+            },
+
+            modifier =
+                Modifier.align(
+                    Alignment.CenterHorizontally
+                )
+        ) {
+
+            Text(
+                text = "+ Agregar materia",
+                style =
+                    MaterialTheme.typography.bodyMedium,
+                color =
+                    MaterialTheme.colorScheme.primary
+            )
+        }
+
+
+        Spacer(
+            modifier = Modifier.height(22.dp)
+        )
+
+
+        // ------------------------------------------------
+        // DISPONIBILIDAD
+        // ------------------------------------------------
+
+        Text(
+            text =
+                "¿Cuándo sueles tener tiempo para estudiar?",
+
+            style =
+                MaterialTheme.typography.titleMedium,
+
+            color =
+                MaterialTheme.colorScheme.onBackground
+        )
+
+
+        Spacer(
+            modifier = Modifier.height(18.dp)
+        )
+
+
+        uiState.availability.forEach { availability ->
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 4.dp, horizontal = 4.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(
+                        vertical = 5.dp
+                    ),
+
+                horizontalArrangement =
+                    Arrangement.SpaceBetween,
+
+                verticalAlignment =
+                    Alignment.CenterVertically
             ) {
+
                 Text(
-                    text = subject.name,
-                    fontSize = 15.sp,
-                    color = TextPrimary
+                    text = availability.day,
+                    style =
+                        MaterialTheme.typography.bodyMedium,
+                    color =
+                        MaterialTheme.colorScheme.onSurface
+                )
+
+
+                Text(
+                    text = availability.hours,
+                    style =
+                        MaterialTheme.typography.bodyMedium,
+                    color =
+                        MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
 
-        TextButton(
-            onClick = { /* Agregar materia — demo */ },
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.textButtonColors(contentColor = SageGreen)
-        ) {
-            Text("+ Agregar materia", fontWeight = FontWeight.Medium)
-        }
 
-        Spacer(modifier = Modifier.height(20.dp))
-
-        // Sección 2: Disponibilidad
-        Text(
-            text = "¿Cuándo sueles tener tiempo para estudiar?",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = TextPrimary
+        Spacer(
+            modifier = Modifier.height(4.dp)
         )
-        Spacer(modifier = Modifier.height(8.dp))
 
-        uiState.availability.forEach { avail ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 6.dp, horizontal = 4.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(avail.day, fontSize = 15.sp, color = TextPrimary)
-                Text(avail.hours, fontSize = 14.sp, color = TextSecondary)
-            }
-        }
 
         TextButton(
-            onClick = { },
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.textButtonColors(contentColor = SageGreen)
+            onClick = {
+                // Funcionalidad futura:
+                // editar disponibilidad.
+            },
+
+            modifier =
+                Modifier.align(
+                    Alignment.CenterHorizontally
+                )
         ) {
-            Text("Editar disponibilidad", fontWeight = FontWeight.Medium)
+
+            Text(
+                text = "Editar disponibilidad",
+                style =
+                    MaterialTheme.typography.bodySmall,
+                color =
+                    MaterialTheme.colorScheme.primary
+            )
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
 
-        // Acción principal
+        Spacer(
+            modifier = Modifier.height(30.dp)
+        )
+
+
+        // ------------------------------------------------
+        // CREAR PLAN
+        // ------------------------------------------------
+
         Button(
             onClick = onComplete,
+
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp),
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = SageGreen)
+
+            shape =
+                RoundedCornerShape(12.dp),
+
+            colors =
+                ButtonDefaults.buttonColors(
+
+                    containerColor =
+                        MaterialTheme.colorScheme.primary,
+
+                    contentColor =
+                        MaterialTheme.colorScheme.onPrimary
+                )
         ) {
+
             Text(
                 text = "Crear mi plan",
-                fontSize = 15.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = SurfaceWhite
+                style =
+                    MaterialTheme.typography.labelLarge
             )
         }
 
-        Spacer(modifier = Modifier.height(12.dp))
+
+        Spacer(
+            modifier = Modifier.height(4.dp)
+        )
+
 
         TextButton(
             onClick = onSkip,
-            modifier = Modifier.fillMaxWidth()
+
+            modifier =
+                Modifier.fillMaxWidth()
         ) {
+
             Text(
                 text = "Configurar después",
-                fontSize = 14.sp,
-                color = TextSecondary,
-                textAlign = TextAlign.Center
+                style =
+                    MaterialTheme.typography.bodySmall,
+                color =
+                    MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
+
+
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
     }
 }

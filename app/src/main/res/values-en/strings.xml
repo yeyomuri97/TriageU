@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TriageU</string>
+    <string name="app_slogan">Prioritize your time. Move at your own pace.</string>
+    <string name="nav_today">Today</string>
+    <string name="nav_route">My Route</string>
+    <string name="nav_progress">Progress</string>
+    <string name="nav_profile">Profile</string>
+    <string name="action_add">Add</string>
+    <string name="action_save">Save</string>
+    <string name="action_back">Back</string>
+
+</resources>

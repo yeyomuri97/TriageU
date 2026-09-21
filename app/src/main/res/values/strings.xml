@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Portal Unicauca</string>
+    <string name="app_name">TriageU</string>
+    <string name="app_slogan">Prioriza tu tiempo. Avanza a tu ritmo.</string>
+    <string name="nav_today">Hoy</string>
+    <string name="nav_route">Mi Ruta</string>
+    <string name="nav_progress">Progreso</string>
+    <string name="nav_profile">Perfil</string>
+    <string name="action_add">Agregar</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_back">Volver</string>
 </resources>
