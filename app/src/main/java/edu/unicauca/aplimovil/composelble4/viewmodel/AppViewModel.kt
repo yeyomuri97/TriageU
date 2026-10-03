@@ -227,6 +227,9 @@ data class AppUiState(
     val activeDays: Int =
         4,
 
+    val profileProgress: Int =
+        0,
+
     val weekDays: List<ProgressDay> = listOf(
         ProgressDay("L", true),
         ProgressDay("M", true),
@@ -356,25 +359,34 @@ class AppViewModel : ViewModel() {
 
         _uiState.update { state ->
 
-            state.copy(
+            val updatedActivities =
+                state.todayActivities.map { activity ->
 
-                todayActivities =
-                    state.todayActivities.map { activity ->
+                    if (activity.id == id) {
 
-                        if (
-                            activity.id == id
-                        ) {
+                        activity.copy(
+                            completed = !activity.completed
+                        )
 
-                            activity.copy(
-                                completed =
-                                    !activity.completed
-                            )
+                    } else {
 
-                        } else {
-
-                            activity
-                        }
+                        activity
                     }
+                }
+
+            val completedActivities =
+                updatedActivities.count { it.completed }
+
+            val progress =
+                if (updatedActivities.isEmpty()) {
+                    0
+                } else {
+                    (completedActivities * 100) / updatedActivities.size
+                }
+
+            state.copy(
+                todayActivities = updatedActivities,
+                profileProgress = progress
             )
         }
     }
