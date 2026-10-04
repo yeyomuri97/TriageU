@@ -382,7 +382,7 @@ fun UnicaucaApp(
                         uiState = uiState,
 
                         onToggleComplete = {
-                            viewModel.toggleActivityCompleted(it)
+                            viewModel.toggleActivityComplete(it)
                         }
                     )
                 }
