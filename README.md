@@ -4,6 +4,8 @@ App Android para priorizar el tiempo de estudio. Ayuda al estudiante a organizar
 
 **Prioriza tu tiempo. Avanza a tu ritmo.**
 
+![TriageU — pantallas principales](docs/screens.png)
+
 Proyecto académico — Universidad del Cauca.
 
 ---
