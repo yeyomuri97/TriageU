@@ -34,6 +34,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import edu.unicauca.aplimovil.composelble4.ui.navigation.Screen
 import edu.unicauca.aplimovil.composelble4.ui.navigation.bottomNavItems
+import edu.unicauca.aplimovil.composelble4.ui.screens.AcercaScreen
 import edu.unicauca.aplimovil.composelble4.ui.screens.HoyScreen
 import edu.unicauca.aplimovil.composelble4.ui.screens.MiRutaScreen
 import edu.unicauca.aplimovil.composelble4.ui.screens.NuevaActividadScreen
@@ -67,7 +68,6 @@ fun UnicaucaApp(
         }
 
     Scaffold(
-
         containerColor =
             MaterialTheme.colorScheme.background,
 
@@ -134,7 +134,6 @@ fun UnicaucaApp(
                             colors = navigationItemColors()
                         )
 
-
                         // MI RUTA
                         val ruta = bottomNavItems[1]
 
@@ -183,12 +182,10 @@ fun UnicaucaApp(
                             colors = navigationItemColors()
                         )
 
-
                         // ESPACIO CENTRAL PARA EL +
                         Spacer(
                             modifier = Modifier.width(72.dp)
                         )
-
 
                         // PROGRESO
                         val progreso = bottomNavItems[2]
@@ -238,7 +235,6 @@ fun UnicaucaApp(
                             colors = navigationItemColors()
                         )
 
-
                         // PERFIL
                         val perfil = bottomNavItems[3]
 
@@ -287,7 +283,6 @@ fun UnicaucaApp(
                             colors = navigationItemColors()
                         )
                     }
-
 
                     // BOTÓN + SOBRESALIENDO DE LA BARRA
                     FloatingActionButton(
@@ -375,7 +370,6 @@ fun UnicaucaApp(
                     )
                 }
 
-
                 composable(Screen.Hoy.route) {
 
                     HoyScreen(
@@ -387,14 +381,12 @@ fun UnicaucaApp(
                     )
                 }
 
-
                 composable(Screen.MiRuta.route) {
 
                     MiRutaScreen(
                         uiState = uiState
                     )
                 }
-
 
                 composable(Screen.Progreso.route) {
 
@@ -403,14 +395,27 @@ fun UnicaucaApp(
                     )
                 }
 
-
                 composable(Screen.Perfil.route) {
 
                     PerfilScreen(
-                        uiState = uiState
+                        uiState = uiState,
+
+                        onAboutClick = {
+                            navController.navigate(
+                                Screen.Acerca.route
+                            )
+                        }
                     )
                 }
 
+                composable(Screen.Acerca.route) {
+
+                    AcercaScreen(
+                        onBack = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
 
                 composable(Screen.NuevaActividad.route) {
 
@@ -460,7 +465,6 @@ fun UnicaucaApp(
         }
     }
 }
-
 
 @Composable
 private fun navigationItemColors() =
