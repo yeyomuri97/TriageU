@@ -13,6 +13,9 @@ lifecycleViewmodelCompose = "2.11.0"
 firebaseBom = "33.12.0"
 googleServices = "4.4.2"
 
+room = "2.8.5"
+ksp = "2.3.6"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -36,7 +39,14 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 
+# Room
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
